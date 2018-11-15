@@ -1,0 +1,2 @@
+---- NO ACK Register Matches (1 in 1 files) ----
+MPU6050GetDeviceID in MPU6050.c (E:\嵌入式学习\drone\flight-control\HARDWARE\MPU6050) : 		printf("\r\n NO ACK Register \r\n");

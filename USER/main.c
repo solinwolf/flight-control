@@ -1,4 +1,4 @@
-#include "led.h"
+ #include "led.h"
 #include "delay.h"
 #include "sys.h"
 #include "usart.h"
@@ -9,7 +9,8 @@
 
 ************************************************/
 int main(void)
-{		
+{	
+	u16 accel[3] = {0};
 	delay_init();	    	 //延时函数初始化	  
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //设置NVIC中断分组2:2位抢占优先级，2位响应优先级
 	uart_init(115200);	 //串口初始化为115200
@@ -18,11 +19,12 @@ int main(void)
 //	MotorPwmFlash(20,20,20,20);
 	IICInit();
 	MPU6050Init();
-
+	
 	while(1)
 	{
-		printf("Temperature:%f\r\n",MPU6050ReadTemp());
-		delay_ms(100);
+		MPU6050ReadAccel(MPU6050_ADDR,accel);
+		printf("data:%2X\r\n",IICReadByteFromRegister(MPU6050_ADDR, WHO_AM_I));
+		delay_ms(2000);
 	}	 
 }
 

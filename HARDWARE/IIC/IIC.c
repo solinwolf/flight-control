@@ -21,28 +21,28 @@ void IICStart(void)
 	SDA_OUT();
 	IIC_SDA = 1;
 	IIC_SCL = 1;
-	delay_us(4);
+	delay_us(2);
 	IIC_SDA = 0;
-	delay_us(4);
+	delay_us(2);
 	IIC_SCL = 0;
 	
 }
 void IICStop(void)
 {
 	SDA_OUT();
-	IIC_SCL = 0;
+	IIC_SCL = 1;
 	IIC_SDA = 0;
-	delay_us(4);
+	delay_us(2);
 	IIC_SCL = 1;
 	IIC_SDA = 1;
-	delay_us(4);
+	delay_us(2);
 }
 uint8_t IICWaitAck(void)
 {
 	uint8_t ucErrTime=0;
 	SDA_IN();      //SDA设置为输入  
-	IIC_SDA=1;delay_us(1);	   
-	IIC_SCL=1;delay_us(1);	 
+	IIC_SDA=1;delay_us(2);	   
+	IIC_SCL=1;delay_us(2);	 
 	while(READ_SDA)
 	{
 		ucErrTime++;
@@ -51,7 +51,7 @@ uint8_t IICWaitAck(void)
 			IICStop();
 			return 1;
 		}
-		delay_us(1);
+		delay_us(2);
 	}
 	IIC_SCL=0;//时钟输出0 	   
 	return 0;  
@@ -59,23 +59,21 @@ uint8_t IICWaitAck(void)
 
 void IICAck(void)
 {
-	IIC_SCL = 0;
 	SDA_OUT();
-	IIC_SDA = 0;
-	delay_us(1);
 	IIC_SCL = 1;
-	delay_us(1);
+	IIC_SDA = 0;
+	delay_us(2);
 	IIC_SCL = 0;
+	delay_us(2);
 }
 void IICNack(void)
 {
-	IIC_SCL = 0;
 	SDA_OUT();
-	IIC_SDA = 1;
-	delay_us(1);
 	IIC_SCL = 1;
-	delay_us(1);
+	IIC_SDA = 1;
+	delay_us(2);
 	IIC_SCL = 0;
+	delay_us(2);
 }
 uint8_t IICReadOneByte(uint8_t a)
 {
@@ -85,11 +83,11 @@ uint8_t IICReadOneByte(uint8_t a)
 	for(index=0;index<8;index++)
 	{
 		IIC_SCL = 0;
-		delay_us(1);
+		delay_us(2);
 		IIC_SCL = 1;
 		ret <<= 1;
 		if(READ_SDA)ret++;
-		delay_us(1);
+		delay_us(2);
 	}
 	if(!ack)
 		IICNack();
@@ -103,15 +101,16 @@ void IICWriteOneByte(uint8_t data)
     uint8_t t;   
 	SDA_OUT(); 	    
     IIC_SCL=0;//拉低时钟开始数据传输
+	delay_us(2); 
     for(t=0;t<8;t++)
     {              
         IIC_SDA=(data&0x80)>>7;
         data<<=1; 	  
-		delay_us(1);   
+		delay_us(2);   
 		IIC_SCL=1;
-		delay_us(1); 
+		delay_us(2); 
 		IIC_SCL=0;	
-		delay_us(1);
+		delay_us(2);
     }	 
 
 }
@@ -138,12 +137,30 @@ uint8_t IICReadByteFromRegister(uint8_t dev_addr,uint8_t reg)
 	uint8_t data = 0;
 	IICStart();
 	IICWriteOneByte(dev_addr);
-	IICWaitAck();
+	if(IICWaitAck())
+	{
+		printf("\r\n NO ACK for Address\r\n");
+		IICStop();
+		return data;
+	}
+
 	IICWriteOneByte(reg);
-	IICWaitAck();
+	if(IICWaitAck())
+	{
+		printf("\r\n NO ACK Register %02X\r\n",reg);
+		IICStop();
+		return data;
+	}
+
 	IICStart();
 	IICWriteOneByte(dev_addr+1);
-	IICWaitAck();
+	if(IICWaitAck())
+	{
+		printf("\r\n NO ACK Data \r\n");
+		IICStop();
+		return data;
+	}
+
 	data = IICReadOneByte(nack);
 	IICStop();
 	return data;
@@ -154,19 +171,38 @@ uint8_t IICReadBytes(uint8_t dev_addr,uint8_t reg,uint8_t* data,uint8_t len)
 {
 	uint8_t index = 0;
 	if(!data || len<=0)
-		return 1;
+		return index;
 	IICStart();
 	IICWriteOneByte(dev_addr);
-	IICWaitAck();
+	
+	if(IICWaitAck())
+	{
+		printf("\r\n NO ACK for Address\r\n");
+		IICStop();
+		return index;
+	}
+
 
 
 	IICWriteOneByte(reg);
-	IICWaitAck();
+	if(IICWaitAck())
+	{
+		printf("\r\n NO ACK Register %02X\r\n",reg);
+		IICStop();
+		return index;
+	}
+
 
 
 	IICStart();
 	IICWriteOneByte(dev_addr+1);
-	IICWaitAck();
+	if(IICWaitAck())
+	{
+		printf("\r\n NO ACK Data \r\n");
+		IICStop();
+		return index;
+	}
+
 
 	for(index=0;index<len;index++)
 	{

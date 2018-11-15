@@ -27,7 +27,7 @@ extern void IICWriteOneByte(uint8_t data);
 extern uint8_t IICReadBytes(uint8_t dev_addr,uint8_t reg,uint8_t* data,uint8_t len);
 extern uint8_t IICWriteBytes(uint8_t dev_addr,uint8_t reg,uint8_t* data,uint8_t len);
 extern void IICWriteByteToRegister(uint8_t dev_addr,uint8_t reg,uint8_t data);
-
+extern uint8_t IICReadByteFromRegister(uint8_t dev_addr,uint8_t reg);
 
 #endif
 

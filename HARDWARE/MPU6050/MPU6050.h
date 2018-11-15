@@ -87,6 +87,8 @@
 void MPU6050Init(void);
 uint8_t MPU6050GetDeviceID(uint8_t dev_addr);
 float MPU6050ReadTemp(void);
+void MPU6050ReadAccel(uint8_t dev_addr,uint16_t* data);
+void MPU6050ReadGyro(uint8_t dev_addr,uint16_t* data);
 
 
 #endif

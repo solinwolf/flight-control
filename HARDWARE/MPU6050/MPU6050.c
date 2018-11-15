@@ -8,14 +8,22 @@
 void MPU6050Init(void)
 {
 	IICWriteByteToRegister(MPU6050_ADDR,POWER_MANAGEMENT1,0x80);
-    delay_ms(50);
-    IICWriteByteToRegister(MPU6050_ADDR, SAMPLE_RATE_DIVIDER, 0x00);      //SMPLRT_DIV    -- SMPLRT_DIV = 0  Sample Rate = Gyroscope Output Rate / (1 + SMPLRT_DIV)
-    IICWriteByteToRegister(MPU6050_ADDR, POWER_MANAGEMENT1, 0x03);      //PWR_MGMT_1    -- SLEEP 0; CYCLE 0; TEMP_DIS 0; CLKSEL 3 (PLL with Z Gyro reference)
-    IICWriteByteToRegister(MPU6050_ADDR, INT_ENABLE_CONFIG, 0 << 7 | 0 << 6 | 0 << 5 | 0 << 4 | 0 << 3 | 0 << 2 | 1 << 1 | 0 << 0);  // INT_PIN_CFG   -- INT_LEVEL_HIGH, INT_OPEN_DIS, LATCH_INT_DIS, INT_RD_CLEAR_DIS, FSYNC_INT_LEVEL_HIGH, FSYNC_INT_DIS, I2C_BYPASS_EN, CLOCK_DIS
-    IICWriteByteToRegister(MPU6050_ADDR, CONFIG, 0x03);  //CONFIG        -- EXT_SYNC_SET 0 (disable input pin for data sync) ; default DLPF_CFG = 0 => ACC bandwidth = 260Hz  GYRO bandwidth = 256Hz)
-	//	MPU6050_setFullScaleGyroRange(MPU6050_GYRO_FS_2000);
-    // Accel scale 8g (4096 LSB/g)
-    IICWriteByteToRegister(MPU6050_ADDR, ACCELEROMETER_CONFIG, 2 << 3);
+    delay_ms(100);
+
+	IICWriteByteToRegister(MPU6050_ADDR,POWER_MANAGEMENT1,0x00);
+	IICWriteByteToRegister(MPU6050_ADDR, GYROSCOPE_CONFIG, 3<<3);
+	IICWriteByteToRegister(MPU6050_ADDR, ACCELEROMETER_CONFIG, 0);
+    IICWriteByteToRegister(MPU6050_ADDR, SAMPLE_RATE_DIVIDER, 19);     
+	IICWriteByteToRegister(MPU6050_ADDR,INTERRUPT_ENABLE,0x00);
+	IICWriteByteToRegister(MPU6050_ADDR, USER_CONTROL, 0x00);
+    IICWriteByteToRegister(MPU6050_ADDR, POWER_MANAGEMENT1, 0x01);     
+	IICWriteByteToRegister(MPU6050_ADDR, FIFO_ENABLE, 0x00);
+	IICWriteByteToRegister(MPU6050_ADDR, INT_ENABLE_CONFIG, 0x80);
+	
+	IICWriteByteToRegister(MPU6050_ADDR, POWER_MANAGEMENT1, 0x03);
+	IICWriteByteToRegister(MPU6050_ADDR, POWER_MANAGEMENT2, 0x00);
+
+
 
 }
 
@@ -27,12 +35,17 @@ uint8_t MPU6050GetDeviceID(uint8_t dev_addr)
 	
 	if(IICWaitAck())
 	{
-		printf("\r\n NO ACK for Address\r\n");
+		printf("\r\n NO ACK for Address\r\n");	
+		IICStop();
+		return ret;
 	}
 	IICWriteOneByte(WHO_AM_I);
 	if(IICWaitAck())
 	{
-		printf("\r\n NO ACK Register \r\n");
+		printf("\r\n NO ACK Register %02X\r\n",WHO_AM_I);
+
+		IICStop();
+		return ret;
 	}
 
 	IICStart();
@@ -40,6 +53,8 @@ uint8_t MPU6050GetDeviceID(uint8_t dev_addr)
 	if(IICWaitAck())
 	{
 		printf("\r\n NO ACK Data \r\n");
+		IICStop();
+		return ret;
 	}
 
 	ret = IICReadOneByte(nack);
@@ -61,4 +76,33 @@ float MPU6050ReadTemp(void)
 	
 	return temp;
 }
+
+void MPU6050ReadAccel(uint8_t dev_addr,uint16_t* data)
+{
+	uint8_t buf[6] = {1};
+	if(IICReadBytes(dev_addr,ACCEL_XOUT_H,buf,6))
+	{
+		data[0] = (uint16_t)(buf[0]<<8 | buf[1]);
+		data[1] = (uint16_t)(buf[2]<<8 | buf[3]);
+		data[2] = (uint16_t)(buf[4]<<8 | buf[5]);
+	}
+
+	printf("data:%d %d %d %d %d %d\r\n",buf[0],buf[1],buf[2],buf[3],buf[4],buf[5]);
+	
+}
+void MPU6050ReadGyro(uint8_t dev_addr,uint16_t* data)
+{
+	uint8_t buf[6] = {1};
+	if(IICReadBytes(dev_addr,GYRO_XOUT_H,buf,6)==6)
+	{
+		data[0] = (uint16_t)(buf[0]<<8 | buf[1]);
+		data[1] = (uint16_t)(buf[2]<<8 | buf[3]);
+		data[2] = (uint16_t)(buf[4]<<8 | buf[5]);
+
+	}
+	printf("data:%d %d %d %d %d %d\r\n",buf[0],buf[1],buf[2],buf[3],buf[4],buf[5]);
+
+}
+
+
 

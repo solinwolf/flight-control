@@ -1,5 +1,5 @@
 Dependencies for Project 'FLIGHT', Target 'USART': (DO NOT MODIFY !)
-F (.\main.c)(0x5BE1B0A8)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\MOTO -I..\HARDWARE\MPU6050 -I..\HARDWARE\IIC-I E:\嵌入式学习\drone\flight-control\USER\RTE-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I E:\Keil_v5\ARM\CMSIS\Include-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x5BED96E2)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\MOTO -I..\HARDWARE\MPU6050 -I..\HARDWARE\IIC-I E:\嵌入式学习\drone\flight-control\USER\RTE-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I E:\Keil_v5\ARM\CMSIS\Include-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\HARDWARE\LED\led.h)(0x5BDD2F31)
 I (..\SYSTEM\sys\sys.h)(0x5BDE6133)
 I (..\USER\stm32f10x.h)(0x5BDD20D5)
@@ -34,8 +34,8 @@ I (..\SYSTEM\delay\delay.h)(0x5BDE5E0C)
 I (..\SYSTEM\usart\usart.h)(0x50517A82)
 I (E:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (..\HARDWARE\MOTO\moto.h)(0x5BDD3567)
-I (..\HARDWARE\MPU6050\mpu6050.h)(0x5BE1ABB5)
-I (..\HARDWARE\IIC\iic.h)(0x5BE99789)
+I (..\HARDWARE\MPU6050\mpu6050.h)(0x5BED8CD4)
+I (..\HARDWARE\IIC\iic.h)(0x5BE99D96)
 I (..\CORE\type.h)(0x5BE06586)
 F (.\stm32f10x_it.c)(0x4EBEACB0)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\MOTO -I..\HARDWARE\MPU6050 -I..\HARDWARE\IIC-I E:\嵌入式学习\drone\flight-control\USER\RTE-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I E:\Keil_v5\ARM\CMSIS\Include-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_it.o --omf_browse ..\obj\stm32f10x_it.crf --depend ..\obj\stm32f10x_it.d)
 I (stm32f10x_it.h)(0x4D99A426)
@@ -160,8 +160,8 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\HARDWARE\Moto\moto.h)(0x5BDD3567)
 I (E:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
-F (..\HARDWARE\MPU6050\MPU6050.c)(0x5BE1B2C9)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\MOTO -I..\HARDWARE\MPU6050 -I..\HARDWARE\IIC-I E:\嵌入式学习\drone\flight-control\USER\RTE-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I E:\Keil_v5\ARM\CMSIS\Include-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\mpu6050.o --omf_browse ..\obj\mpu6050.crf --depend ..\obj\mpu6050.d)
-I (..\HARDWARE\IIC\IIC.h)(0x5BE99789)
+F (..\HARDWARE\MPU6050\MPU6050.c)(0x5BED9650)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\MOTO -I..\HARDWARE\MPU6050 -I..\HARDWARE\IIC-I E:\嵌入式学习\drone\flight-control\USER\RTE-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I E:\Keil_v5\ARM\CMSIS\Include-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\mpu6050.o --omf_browse ..\obj\mpu6050.crf --depend ..\obj\mpu6050.d)
+I (..\HARDWARE\IIC\IIC.h)(0x5BE99D96)
 I (..\CORE\type.h)(0x5BE06586)
 I (E:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
 I (..\USER\stm32f10x.h)(0x5BDD20D5)
@@ -191,15 +191,15 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x5051A0AE)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-I (..\HARDWARE\MPU6050\MPU6050.h)(0x5BE1ABB5)
+I (..\HARDWARE\MPU6050\MPU6050.h)(0x5BED8CD4)
 I (..\SYSTEM\delay\delay.h)(0x5BDE5E0C)
 I (..\SYSTEM\sys\sys.h)(0x5BDE6133)
 I (..\SYSTEM\usart\usart.h)(0x50517A82)
 I (E:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
-F (..\HARDWARE\IIC\IIC.c)(0x5BE99768)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\MOTO -I..\HARDWARE\MPU6050 -I..\HARDWARE\IIC-I E:\嵌入式学习\drone\flight-control\USER\RTE-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I E:\Keil_v5\ARM\CMSIS\Include-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\iic.o --omf_browse ..\obj\iic.crf --depend ..\obj\iic.d)
+F (..\HARDWARE\IIC\IIC.c)(0x5BED9354)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\MOTO -I..\HARDWARE\MPU6050 -I..\HARDWARE\IIC-I E:\嵌入式学习\drone\flight-control\USER\RTE-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I E:\Keil_v5\ARM\CMSIS\Include-I E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\iic.o --omf_browse ..\obj\iic.crf --depend ..\obj\iic.d)
 I (..\CORE\type.h)(0x5BE06586)
 I (E:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
-I (..\HARDWARE\IIC\IIC.h)(0x5BE99789)
+I (..\HARDWARE\IIC\IIC.h)(0x5BE99D96)
 I (..\USER\stm32f10x.h)(0x5BDD20D5)
 I (..\CORE\core_cm3.h)(0x4D523B58)
 I (..\USER\system_stm32f10x.h)(0x4D783CAA)
